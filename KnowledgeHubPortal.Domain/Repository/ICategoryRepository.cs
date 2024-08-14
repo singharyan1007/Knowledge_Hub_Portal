@@ -10,5 +10,9 @@ namespace KnowledgeHubPortal.Domain.Repository
     public  interface ICategoryRepository
     {
         void Create(Category category);
+        void Update(Category category);
+
+        List<Category> GetAll();
+        Category GetById(int id);
     }
 }

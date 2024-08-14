@@ -5,6 +5,20 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp37", "ConsoleApp37\ConsoleApp37.csproj", "{1D0BCFE7-BCA5-47D1-92CE-F61691ACF84F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API Layer", "API Layer", "{8454E913-1529-4E49-A4DB-E8E2219E6835}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Layer", "Data Layer", "{8BD92DE9-BD5F-46A6-894F-3155FC8B48B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Layer", "Domain Layer", "{9D9AC494-A496-48AD-AAC1-F658AE10BF45}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation Layer", "Presentation Layer", "{24227EEA-1299-4678-8D7C-7C8FF7FD1BFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeHubPortal.Data", "KnowledgeHubPortal.Data\KnowledgeHubPortal.Data.csproj", "{2B200058-C802-44AF-A105-898E80436BF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeHubPortal.Domain", "KnowledgeHubPortal.Domain\KnowledgeHubPortal.Domain.csproj", "{CCEAE8C4-09FB-4D35-AB7E-B1E2B9EFE500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeHubPortal.WebApp", "KnowledgeHubPortal.WebApp\KnowledgeHubPortal.WebApp.csproj", "{05077060-D904-48F7-90E0-2501453608F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +29,26 @@ Global
 		{1D0BCFE7-BCA5-47D1-92CE-F61691ACF84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D0BCFE7-BCA5-47D1-92CE-F61691ACF84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D0BCFE7-BCA5-47D1-92CE-F61691ACF84F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B200058-C802-44AF-A105-898E80436BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B200058-C802-44AF-A105-898E80436BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B200058-C802-44AF-A105-898E80436BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B200058-C802-44AF-A105-898E80436BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCEAE8C4-09FB-4D35-AB7E-B1E2B9EFE500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCEAE8C4-09FB-4D35-AB7E-B1E2B9EFE500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCEAE8C4-09FB-4D35-AB7E-B1E2B9EFE500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCEAE8C4-09FB-4D35-AB7E-B1E2B9EFE500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05077060-D904-48F7-90E0-2501453608F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05077060-D904-48F7-90E0-2501453608F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05077060-D904-48F7-90E0-2501453608F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05077060-D904-48F7-90E0-2501453608F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2B200058-C802-44AF-A105-898E80436BF9} = {8BD92DE9-BD5F-46A6-894F-3155FC8B48B9}
+		{CCEAE8C4-09FB-4D35-AB7E-B1E2B9EFE500} = {9D9AC494-A496-48AD-AAC1-F658AE10BF45}
+		{05077060-D904-48F7-90E0-2501453608F2} = {24227EEA-1299-4678-8D7C-7C8FF7FD1BFC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5D80E8A3-A2A4-42E3-8B0D-8E37F229B3FE}

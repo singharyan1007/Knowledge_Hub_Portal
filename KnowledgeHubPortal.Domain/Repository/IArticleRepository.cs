@@ -7,13 +7,13 @@ using KnowledgeHubPortal.Domain.Entities;
 
 namespace KnowledgeHubPortal.Domain.Repository
 {
-    public  interface ICategoryRepository
+    public interface IArticleRepository
     {
-        void Create(Category category);
-        void Update(Category category);
+        void Create(Article article);
+        void Update(Article article);
 
-        List<Category> GetAll();
-        Category GetById(int id);
+        List<Article> GetAll();
+        Article GetById(int id);
 
         void Delete(int id);
     }

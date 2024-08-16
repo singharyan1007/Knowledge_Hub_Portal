@@ -1,15 +1,35 @@
 ﻿@model KnowledgeHubPortal.Domain.Entities.Category
 <div class="container mt-5">
         <h2 class="mb-4">Create New Category</h2>
+       
+        @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+
+       
+
+
+
         <form asp-action="Save" asp-controller="Categories" method="post">
+
+            @Html.ValidationSummary()
             <div class="mb-3">
                 <label for="CategoryName" class="form-label">Category Name</label>
-                <input type="text" class="form-control" id="CategoryName" asp-for="CategoryName" placeholder="Enter category name" required>
+                <input type="text" class="form-control" id="CategoryName" asp-for="CategoryName" placeholder="Enter category name" >
+               
+                 <span asp-validation-for="CategoryName" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label for="CategoryDescription" class="form-label">Category Description</label>
-                <textarea class="form-control" id="CategoryDescription" asp-for="CategoryDescription" rows="4" placeholder="Enter category description" required></textarea>
+                <textarea class="form-control" id="CategoryDescription" asp-for="CategoryDescription" rows="4" placeholder="Enter category description"></textarea>
             </div>
+            
+             <span asp-validation-for="CategoryDescription" class="text-danger"></span>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    @section Scripts
+    {
+             <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }

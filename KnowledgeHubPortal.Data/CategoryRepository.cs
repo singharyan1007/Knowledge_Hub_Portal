@@ -33,5 +33,10 @@ namespace KnowledgeHubPortal.Data
             db.Categories.Update(category);
             db.SaveChanges();
         }
+        public void Delete(int id)
+        {
+            db.Categories.Remove(db.Categories.Find(id));
+            db.SaveChanges();
+        }
     }
 }

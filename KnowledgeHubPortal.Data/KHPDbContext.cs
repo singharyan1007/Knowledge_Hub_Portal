@@ -26,6 +26,15 @@ namespace KnowledgeHubPortal.Data
             }
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Article>()
+                .HasOne(a => a.Category)
+                .WithMany(c => c.Articles)
+                .HasForeignKey(c => c.CateoryId);
+        }
+
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Article> Articles { get; set; }
     }
 }

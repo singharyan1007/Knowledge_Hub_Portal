@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using KnowledgeHubPortal.Domain.Entities;
 namespace KnowledgeHubPortal.Data
 {
-    internal class KHPDbContext:DbContext
+    public class KHPDbContext:DbContext
     {
         //Context file should not leave the DAL layer
         public KHPDbContext(DbContextOptions<KHPDbContext> options) : base(options)
@@ -21,7 +21,7 @@ namespace KnowledgeHubPortal.Data
             //If the client does not provide any options builder then only 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=KHPDb2024;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
 
             }
         }

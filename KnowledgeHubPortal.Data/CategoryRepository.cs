@@ -8,7 +8,7 @@ using KnowledgeHubPortal.Domain.Repository;
 
 namespace KnowledgeHubPortal.Data
 {
-    public class CategoryRepositorys : ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private KHPDbContext db = new KHPDbContext(); //DIP
         //WE have to create a very tight coupling between Repository and Contxt

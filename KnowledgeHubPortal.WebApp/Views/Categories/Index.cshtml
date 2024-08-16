@@ -1,0 +1,25 @@
+﻿@model List<KnowledgeHubPortal.Domain.Entities.Category>
+
+	@* <h1>Category Count: @Model.Count</h1>  *@
+    
+    <a class="btn btn-primary" asp-action="Add"  asp-controller="Categories">Add New Category</a>
+
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+                <tr>
+                    <td>@category.CateoryId</td>
+                    <td>@category.CategoryName</td>
+                    <td>@category.CategoryDescription</td>
+                </tr>
+        }
+    </tbody>
+</table>

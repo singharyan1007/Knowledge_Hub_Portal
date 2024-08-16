@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeHubPortal.Domain.Entities
 {
     public class Category
     {
-
+        [Key]
         public int CateoryId { get; set; }
         [Required]
         [MinLength(3)]

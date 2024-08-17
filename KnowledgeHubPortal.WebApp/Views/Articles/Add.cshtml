@@ -1,5 +1,44 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model KnowledgeHubPortal.Domain.Entities.Article
+
+<div class="container mt-5">
+    <h2 class="mb-4">Create New Article</h2>
+
+    <form asp-action="Save" asp-controller="Articles" method="post">
+
+        @Html.ValidationSummary()
+
+        <div class="mb-3">
+            <label for="Title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="Title" asp-for="Title" placeholder="Enter Title">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Url" class="form-label">Url</label>
+            <input type="text" class="form-control" id="Url" asp-for="Url" placeholder="Enter a valid Url">
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="Description" asp-for="Description" rows="4" placeholder="Enter Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="CategoryId" class="form-label">Category</label>
+            <select asp-for="CateoryId" class="form-control" asp-items="ViewBag.Categories">
+                <option value="">Select a Category</option>
+            </select>
+            <span asp-validation-for="CateoryId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+@section Scripts
+{
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

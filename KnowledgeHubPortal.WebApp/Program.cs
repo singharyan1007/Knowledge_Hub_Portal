@@ -24,6 +24,7 @@ namespace KnowledgeHubPortal.WebApp
 
             //Dependency Injection performed
             builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
 
 
             var app = builder.Build();

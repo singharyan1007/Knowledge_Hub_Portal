@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <h2 class="mb-4">Create New Article</h2>
 
-    <form asp-action="Save" asp-controller="Articles" method="post">
+    <form asp-action="Add" asp-controller="Articles" method="post">
 
         @Html.ValidationSummary()
 
@@ -15,8 +15,8 @@
 
         <div class="mb-3">
             <label for="Url" class="form-label">Url</label>
-            <input type="text" class="form-control" id="Url" asp-for="Url" placeholder="Enter a valid Url">
-            <span asp-validation-for="Url" class="text-danger"></span>
+            <input type="text" class="form-control" id="Url" asp-for="ArticleUrl" placeholder="Enter a valid Url">
+            <span asp-validation-for="ArticleUrl" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
@@ -26,12 +26,20 @@
         </div>
 
         <div class="mb-3">
+            <label for="SubmittedBy" class="form-label">Submitted By</label>
+            <input type="text" class="form-control" id="SubmittedBy" asp-for="SubmittedBy" placeholder="Submitted">
+            <span asp-validation-for="SubmittedBy" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
             <label for="CategoryId" class="form-label">Category</label>
-            <select asp-for="CateoryId" class="form-control" asp-items="ViewBag.Categories">
-                <option value="">Select a Category</option>
+           <select asp-items="ViewBag.Categories" asp-for="CateoryId">       
             </select>
+ 
             <span asp-validation-for="CateoryId" class="text-danger"></span>
         </div>
+
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

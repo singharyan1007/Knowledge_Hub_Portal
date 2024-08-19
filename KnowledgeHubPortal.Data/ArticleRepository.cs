@@ -18,28 +18,47 @@ namespace KnowledgeHubPortal.Data
             db.SaveChanges();
         }
 
-        public void Delete(int id)
+       public  void Approve(List<int> ids)
         {
-            db.Articles.Remove(db.Articles.Find(id));
+            //but this method will call the db again and again for all the records. Sends update statements many times
+            foreach (int id in ids) 
+            {
+                var articlesToApprove = db.Articles.Find(id);
+                if (articlesToApprove != null)
+                {
+                    articlesToApprove.IsApproved = true;
+                }
+            }
             db.SaveChanges();
         }
 
-        public List<Article> GetAll()
+        public List<Article> GetArticlesForApprove(int cid)
         {
-            return db.Articles.ToList();
+            if (cid == 0)
+                return db.Articles.Where(a => !a.IsApproved).ToList();
+            else
+                return db.Articles.Where(a => a.IsApproved && a.CateoryId == cid).ToList();
         }
 
-        public Article GetById(int id)
+       public List<Article> GetArticlesForBrowse(int cid)
         {
-            return db.Articles.Find(id);
+            if(cid==0)
+                return db.Articles.Where(a => a.IsApproved).ToList();
+            else
+                return db.Articles.Where(a => a.IsApproved && a.CateoryId == cid).ToList();
         }
 
-        public void Update(Article article)
+       public void Reject(List<int> ids)
         {
-            db.Articles.Update(article);
+            foreach (int id in ids)
+            {
+                var articlesToApprove = db.Articles.Find(id);
+                if (articlesToApprove != null)
+                {
+                    db.Articles.Remove(articlesToApprove);
+                }
+            }
             db.SaveChanges();
         }
-
-       
     }
 }

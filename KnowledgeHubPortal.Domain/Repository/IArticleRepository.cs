@@ -10,11 +10,10 @@ namespace KnowledgeHubPortal.Domain.Repository
     public interface IArticleRepository
     {
         void Create(Article article);
-        void Update(Article article);
+        void Approve(List<int> ids);
+        void Reject(List<int> ids);
+        List<Article> GetArticlesForBrowse(int cid=0);//default value is 0
+        List<Article> GetArticlesForApprove(int cid=0);//default value is 0
 
-        List<Article> GetAll();
-        Article GetById(int id);
-
-        void Delete(int id);
     }
 }

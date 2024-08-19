@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +20,21 @@ namespace KnowledgeHubPortal.Domain.Entities
         public string Title { get; set; }
 
         [Url]
-        public string Url { get; set; }
+        public string ArticleUrl { get; set; }
 
         [MinLength(10)]
         [MaxLength(50)]
         public string Description { get; set; }
 
-
+        [ForeignKey("Category")]
         public int CateoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
        
         public bool IsApproved { get; set; }
+
+       // [Required] 
+        public string? SubmittedBy { get; set; }
+        public DateTime DateSubmitted { get; set; }
        
 
     }

@@ -18,34 +18,70 @@ namespace KnowledgeHubPortal.WebApp.Controllers
             this.categoryRepository = categoryRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int cid=0)
         {
-            var articles = ArticleRepository.GetAll();
-            return View(articles);
+            //browse articles
+            var articlesToBrowse = ArticleRepository.GetArticlesForBrowse(cid);
+            //var categories = categoryRepository.GetAll();
+
+            var Categories = from cat in categoryRepository.GetAll()
+                             select new SelectListItem { Text = cat.CategoryName, Value = cat.CateoryId.ToString() };
+
+            ViewBag.Categories=Categories;
+           
+            return View(articlesToBrowse);
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
-            List<Category> categories = categoryRepository.GetAll();
-            ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
+            var categories = from cat in categoryRepository.GetAll()
+                             select new SelectListItem { Text = cat.CategoryName, Value = cat.CateoryId.ToString() };
 
+            ViewBag.Categories = categories;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Save(Article article)
+        public IActionResult Add(Article article)
         {
             if (!ModelState.IsValid)
             {
-                // Repopulate the categories in case of a validation error
-                List<Category> categories = categoryRepository.GetAll();
-                ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
 
-                return View("Add", article); // Use "Add" to render the Add view again
+                return View(); 
+            }
+            article.DateSubmitted=DateTime.Now;
+            article.IsApproved = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                article.SubmittedBy = User.Identity.Name;
+            }
+            else
+            {
+                article.SubmittedBy = "Unknown";
             }
 
             ArticleRepository.Create(article);
+            //Before we send the article, a notification needs to be sent
+            //So we use TempData -> read once
+
+            TempData["Message"] = $"Article {article.Title} has been sent to the admin for approval";
+
+
+
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult Approve(int cid = 0)
+        {
+            var articles = ArticleRepository.GetArticlesForApprove();
+            return View(articles);
+        }
+
+        [HttpPost]
+        public IActionResult Approve()
+        {
+            return View();
         }
     }
 

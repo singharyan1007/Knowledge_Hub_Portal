@@ -1,11 +1,23 @@
 ﻿@model List<KnowledgeHubPortal.Domain.Entities.Article>
+
 @if (TempData["Message"] != null)
 {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div id="autoDismissAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Message:</strong> @TempData["Message"]
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+
+        <script>
+            setTimeout(function() {
+                var alertElement = document.getElementById('autoDismissAlert');
+                if (alertElement) {
+                    var alert = new bootstrap.Alert(alertElement);
+                    alert.close();
+                }
+            }, 3000); // 3000 milliseconds = 3 seconds
+        </script>
 }
+
 	<a class="btn btn-primary" asp-action="Add"  asp-controller="Articles">Add New Article</a>
 
 
@@ -13,7 +25,6 @@
    <br/>
    <form asp-action="Index"  asp-controller="Articles">
         <select name="cid" asp-items="ViewBag.Categories">
-            <option disabled selected>Category</option>
             
       
         @*   @foreach (var cat in ViewBag.Categories as List<KnowledgeHubPortal.Domain.Entities.Category>)

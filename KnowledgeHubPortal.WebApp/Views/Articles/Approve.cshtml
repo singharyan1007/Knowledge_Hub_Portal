@@ -1,49 +1,62 @@
-﻿@model List<KnowledgeHubPortal.Domain.Entities.Article>
+﻿@using Humanizer
+@model List<KnowledgeHubPortal.Domain.Entities.Article>
 
 @{
     ViewData["Title"] = "Approve";
 }
 
 <h1>Approve</h1>
+@if (TempData["Message"] != null)
+{
+            <div id="autoDismissAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Message:</strong> @TempData["Message"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
 
-<h4>Article</h4>
-<hr />
+            <script>
+                setTimeout(function() {
+                    var alertElement = document.getElementById('autoDismissAlert');
+                    if (alertElement) {
+                        var alert = new bootstrap.Alert(alertElement);
+                        alert.close();
+                    }
+                }, 3000); // 3000 milliseconds = 3 seconds
+            </script>
+}
 
-<form asp-action="Approve" asp-controller="Articles" method="post">
-    <table class="table">
-         <thead>
+
+     <form method="post">
+<table class="table">
+    <thead>
         <tr>
-
             <th>Select</th>
             <th>Title</th>
-            <th>Article URL</th>
             <th>Category</th>
+            <th>Submitted At</th>
         </tr>
     </thead>
-
     <tbody>
-            @foreach (var data in Model)
+            @foreach (var item in Model)
             {
-             <tr>
 
-                                    <td><input type="checkbox" name="Approve" value="@data.IsApproved" /></td>
-
-                            <td>@data.Title</td>
-                            <td>@data.ArticleUrl</td>
-                            <td>@data.Category.CategoryName</td>
-
-             </tr>   
+                var timeDiff = DateTime.Now.Hour - item.DateSubmitted.Hour;
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="@item.ArticleId" id="select" name="ids">
+                        </td>
+                        <td>
+                            <a href="@item.ArticleUrl">@item.Title</a>
+                        </td>
+                        <td>
+                        @item.Category.CategoryName
+                        </td>
+                        <td>
+                        @timeDiff hours ago
+                        </td>
+                    </tr>
             }
-        </tbody>
-
-    </table>
-
-     <input type="submit" name="btnApprove" value="Approve" />
-     <input type="submit" name="btnReject" value="Reject" / >
-
+    </tbody>
+</table>
+<input class="btn btn-primary" formaction="/Articles/Approve" type="submit" name="approve" value="Approve"/>
+    <input class="btn btn-danger" formaction="/Articles/Reject"  type="submit" name="reject" value="Reject" />
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

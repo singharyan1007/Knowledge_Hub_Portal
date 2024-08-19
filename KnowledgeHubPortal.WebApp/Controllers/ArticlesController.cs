@@ -1,4 +1,5 @@
-﻿using KnowledgeHubPortal.Domain.Entities;
+﻿using KnowledgeHubPortal.Data;
+using KnowledgeHubPortal.Domain.Entities;
 using KnowledgeHubPortal.Domain.Repository;
 using KnowledgeHubPortal.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -74,15 +75,23 @@ namespace KnowledgeHubPortal.WebApp.Controllers
         [HttpGet]
         public IActionResult Approve(int cid = 0)
         {
-            var articles = ArticleRepository.GetArticlesForApprove();
-            return View(articles);
+            var articlesToReview = ArticleRepository.GetArticlesForApprove(cid);
+          
+            return View(articlesToReview);
+        }
+        [HttpPost]
+        public IActionResult Approve(List<int> ids)
+        {
+            ArticleRepository.Approve(ids);
+            return RedirectToAction("Approve");
+        }
+        public IActionResult Reject(List<int> ids)
+        {
+            ArticleRepository.Reject(ids);
+            return RedirectToAction("Approve");
         }
 
-        [HttpPost]
-        public IActionResult Approve()
-        {
-            return View();
-        }
+
     }
 
 }

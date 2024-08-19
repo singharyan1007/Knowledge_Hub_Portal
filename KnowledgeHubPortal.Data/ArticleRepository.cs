@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using KnowledgeHubPortal.Domain.Entities;
 using KnowledgeHubPortal.Domain.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeHubPortal.Data
 {
@@ -34,10 +35,11 @@ namespace KnowledgeHubPortal.Data
 
         public List<Article> GetArticlesForApprove(int cid)
         {
+            
             if (cid == 0)
-                return db.Articles.Where(a => !a.IsApproved).ToList();
+                return db.Articles.Include(c=>c.Category).Where(a => !a.IsApproved).ToList();
             else
-                return db.Articles.Where(a => a.IsApproved && a.CateoryId == cid).ToList();
+                return db.Articles.Include(c=>c.Category).Where(a => !a.IsApproved && a.CateoryId == cid).ToList();
         }
 
        public List<Article> GetArticlesForBrowse(int cid)

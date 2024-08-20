@@ -1,10 +1,12 @@
 ﻿using KnowledgeHubPortal.Data;
 using KnowledgeHubPortal.Domain.Entities;
 using KnowledgeHubPortal.Domain.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowledgeHubPortal.WebApp.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CategoriesController : Controller
     {
         //  .../categories/index
@@ -15,6 +17,8 @@ namespace KnowledgeHubPortal.WebApp.Controllers
         {
             CategoryRepository = categoryRepository;
         }
+
+        //[AllowAnonymous] //Allow it to the user as well.
 
         public IActionResult Index()
         {

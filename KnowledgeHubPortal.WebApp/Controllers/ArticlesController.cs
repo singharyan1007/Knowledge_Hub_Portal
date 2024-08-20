@@ -2,6 +2,7 @@
 using KnowledgeHubPortal.Domain.Entities;
 using KnowledgeHubPortal.Domain.Repository;
 using KnowledgeHubPortal.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ namespace KnowledgeHubPortal.WebApp.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Add()
         {
             var categories = from cat in categoryRepository.GetAll()
@@ -44,6 +46,7 @@ namespace KnowledgeHubPortal.WebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(Article article)
         {
             if (!ModelState.IsValid)
@@ -73,6 +76,7 @@ namespace KnowledgeHubPortal.WebApp.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public IActionResult Approve(int cid = 0)
         {
             var articlesToReview = ArticleRepository.GetArticlesForApprove(cid);
@@ -80,11 +84,15 @@ namespace KnowledgeHubPortal.WebApp.Controllers
             return View(articlesToReview);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Approve(List<int> ids)
         {
             ArticleRepository.Approve(ids);
             return RedirectToAction("Approve");
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Reject(List<int> ids)
         {
             ArticleRepository.Reject(ids);
